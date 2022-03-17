@@ -50,12 +50,12 @@ class Led:
         sleep(self._blink_delay)
 
 
-class MotionTriggeredNightLight:
+class SensorNightLight:
 
-    def __init__(self, trigger_interval=1, trigger_duration=30):
-        self.led = Led(4)
-        self.light = Sensor(27)
-        self.motion = Sensor(28)
+    def __init__(self, led_pin=4, light_pin=27, motion_pin=28, trigger_interval=1, trigger_duration=30):
+        self.led = Led(led_pin)
+        self.light = Sensor(light_pin)
+        self.motion = Sensor(motion_pin)
         self.trigger_interval = trigger_interval
         self.trigger_duration = trigger_duration
         self._loop()
@@ -75,7 +75,4 @@ class MotionTriggeredNightLight:
     
 
 if __name__ == "__main__":
-    MotionTriggeredNightLight()
-
-
-
+    SensorNightLight()
