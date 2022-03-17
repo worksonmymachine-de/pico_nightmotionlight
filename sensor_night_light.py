@@ -14,10 +14,9 @@ class Sensor:
     
     
 class Led:
-    def __init__(self, pin, init_state_off=True, blink_delay=0.5, smart_blink=True):
+    def __init__(self, pin, init_state_off=True, blink_delay=0.5):
         self._led = Pin(pin, Pin.OUT)
         self._blink_delay = blink_delay
-        self._smart_blink = smart_blink
         self._led.off() if init_state_off else self._led.on()
 
     def on(self):
@@ -38,14 +37,11 @@ class Led:
         self._led.off() if self.isOn() else self.on()
         
     def blink(self):
-        self._smart_blink() if self._smart_blink else self._blink()
-        
-    def _blink(self):
         self.on()
         self._blink_delay()
         self.off()
         
-    def _smart_blink(self):
+    def smart_blink(self):
         self.toggle()
         self._blink_delay()
         self.toggle()
@@ -54,7 +50,7 @@ class Led:
         sleep(self._blink_delay)
 
 
-class SensorNightLight:
+class MotionTriggeredNightLight:
 
     def __init__(self, trigger_interval=1, trigger_duration=30):
         self.led = Led(4)
@@ -79,4 +75,7 @@ class SensorNightLight:
     
 
 if __name__ == "__main__":
-    SensorNightLight()
+    MotionTriggeredNightLight()
+
+
+
